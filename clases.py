@@ -1,45 +1,83 @@
 class University:
+    __id = 0
+
     def __init__(self, name: str) -> None:
         self.name = name
+        University.__id += 1
+        self.id = University.__id
+
+    @property
+    def id(self):
+        return self.__id
 
 
-# class Faculty:
-#     def __init__(self, name: str, university: University):
-#         self.name = name
-#         self.university = university
-#
-#
 class User:
-    def __init__(self, nombre: str, apellido: str) -> None:
+    __id = 0
+
+    def __init__(self, nombre: str, last_name: str) -> None:
+        User.__id += 1
+        self.id = User.__id
         self.nombre = nombre
-        self.apellido = apellido
+        self.last_name = last_name
+
+    @property
+    def id(self):
+        return self.__id
 
 
 class Career:
+    __id = 0
+
     def __init__(self, name: str, Faculty: str, university: University) -> None:
+        self.__id = Career.__id
         self.name = name
         self.faculty = Faculty
         self.university = university
 
+    @property
+    def id(self):
+        return self.__id
+
 
 class Teacher(User):
+    __id = 0
+
     def __init__(self, nombre: str, apellido: str) -> None:
         super().__init__(nombre, apellido)
+        self.__id = Teacher.__id
+        self.subject = []
+
+    def add_subject(self, subject):
+        self.subjects.append(subject)
+
+    def qualify(self):
+        pass
 
 
 class Subject:
+    __id = 0
+
     def __init__(self, name: str, teacher: Teacher, level: int,
                  start: str, end: str) -> None:
 
+        self.__id = Subject.__id
         self.name = name
         self.teacher = teacher
         self.level = level
         self.start = start
         self.end = end
 
+    @property
+    def id(self):
+        return self.__id
+
 
 class calification:
-    def __init__(self, subject: Subject, paralell: str, assistance: int, N1: float, N2: float, EX1: float, N3: float, N4: float, EX2: float, RE: float = 0) -> None:
+    __id = 0
+
+    def __init__(self, subject: str, paralell: str, assistance: int, N1: float, N2: float, EX1: float, N3: float, N4: float, EX2: float, RE: float = 0) -> None:
+        calification.__id += 1
+        self.id = calification.__id
         self.subject = subject
         self.paralell = paralell
         self.assistance = assistance
@@ -54,14 +92,34 @@ class calification:
         self.RE = RE
         self.FINAL = (self.P1 + self.P2 + self.RE)
 
+    @property
+    def id(self):
+        return self.__id
+
 
 class Student(User):
-    def __init__(self, nombre: str, apellido: str):
+    def __init__(self, nombre: str, apellido: str) -> None:
         super().__init__(nombre, apellido)
         self.califications = []
+        self.subjects = []
 
-    def add_calification(self, calification: calification):
-        self.califications.append(calification)
+    # recibir calificacion
+    def update_calification(self, calification: calification) -> None:
+        if (self.califications.__len__ > 0):
+            for calification in calification:
+                if (calification.id):
+                    pass
+                    # NOTE: seguir
+
+    # matricular materia
+    def enroll(self, subject: Subject) -> None:
+        if (subject):
+            self.subjects.append(subject)
+
+    # matricular carrera
+    def enroll_career(self, career: Career) -> None:
+        if (career):
+            self.career = (career)
 
 
 class Grade:
