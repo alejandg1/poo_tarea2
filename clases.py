@@ -57,11 +57,12 @@ class Teacher(User):
 class Subject:
     __id = 0
 
-    def __init__(self, name: str, teacher: Teacher, level: int,
+    def __init__(self, name: str, teacher: Teacher, level: int, paralell: str,
                  start: str, end: str) -> None:
 
         self.__id = Subject.__id
         self.name = name
+        self.paralell = paralell
         self.teacher = teacher
         self.level = level
         self.start = start
@@ -72,10 +73,28 @@ class Subject:
         return self.__id
 
 
+class Student(User):
+    def __init__(self, nombre: str, apellido: str) -> None:
+        super().__init__(nombre, apellido)
+        self.califications = []
+        self.subjects = []
+
+    def enroll(self, subject: Subject) -> None:
+        if (subject):
+            self.subjects.append(subject)
+            self.califications.append(
+                calification(subject.name, subject.paralell, 0, 0, 0, 0, 0, 0, 0, 0))
+
+    # matricular carrera
+    def enroll_career(self, career: Career) -> None:
+        if (career):
+            self.career = (career)
+
+
 class calification:
     __id = 0
 
-    def __init__(self, subject: str, paralell: str, assistance: int, N1: float, N2: float, EX1: float, N3: float, N4: float, EX2: float, RE: float = 0) -> None:
+    def __init__(self, subject: str, paralell: str, student: str, assistance: int, N1: float, N2: float, EX1: float, N3: float, N4: float, EX2: float, RE: float = 0) -> None:
         calification.__id += 1
         self.id = calification.__id
         self.subject = subject
@@ -95,31 +114,6 @@ class calification:
     @property
     def id(self):
         return self.__id
-
-
-class Student(User):
-    def __init__(self, nombre: str, apellido: str) -> None:
-        super().__init__(nombre, apellido)
-        self.califications = []
-        self.subjects = []
-
-    # recibir calificacion
-    def update_calification(self, calification: calification) -> None:
-        if (self.califications.__len__ > 0):
-            for calification in calification:
-                if (calification.id):
-                    pass
-                    # NOTE: seguir
-
-    # matricular materia
-    def enroll(self, subject: Subject) -> None:
-        if (subject):
-            self.subjects.append(subject)
-
-    # matricular carrera
-    def enroll_career(self, career: Career) -> None:
-        if (career):
-            self.career = (career)
 
 
 class Grade:
