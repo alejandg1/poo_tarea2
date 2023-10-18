@@ -1,34 +1,33 @@
 class University:
-    __id = 0
+    __id = 1
 
     def __init__(self, name: str) -> None:
-        self.name = name
         University.__id += 1
-        self.id = University.__id
+        self.name = name
+        self.__id = University.__id
 
     @property
     def id(self):
         return self.__id
+
+    def __repr__(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+        }
 
 
 class User:
-    __id = 0
-
     def __init__(self, nombre: str, last_name: str) -> None:
-        User.__id += 1
-        self.id = User.__id
-        self.nombre = nombre
-        self.last_name = last_name
-
-    @property
-    def id(self):
-        return self.__id
+        self.name = nombre
+        self.lastname = last_name
 
 
 class Career:
     __id = 0
 
-    def __init__(self, name: str, Faculty: str, university: University) -> None:
+    def __init__(self, name: str, Faculty: str, university: University = "UNEMI") -> None:
+        Career.__id += 1
         self.__id = Career.__id
         self.name = name
         self.faculty = Faculty
@@ -38,12 +37,21 @@ class Career:
     def id(self):
         return self.__id
 
+    def __repr__(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "faculty": self.faculty,
+            "university": self.university,
+        }
+
 
 class Teacher(User):
     __id = 0
 
     def __init__(self, nombre: str, apellido: str) -> None:
         super().__init__(nombre, apellido)
+        Teacher.__id += 1
         self.__id = Teacher.__id
         self.subject = []
 
@@ -53,6 +61,17 @@ class Teacher(User):
     def qualify(self):
         pass
 
+    @property
+    def id(self):
+        return self.__id
+
+    def __repr__(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "lastname": self.lastname,
+        }
+
 
 class Subject:
     __id = 0
@@ -60,6 +79,7 @@ class Subject:
     def __init__(self, name: str, teacher: Teacher, level: int, paralell: str,
                  start: str, end: str) -> None:
 
+        Subject.__id += 1
         self.__id = Subject.__id
         self.name = name
         self.paralell = paralell
@@ -72,10 +92,25 @@ class Subject:
     def id(self):
         return self.__id
 
+    def __repr__(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "teacher": self.teacher,
+            "level": self.level,
+            "paralell": self.level,
+            "start": self.level,
+            "end": self.level,
+        }
+
 
 class Student(User):
+    __id = 0
+
     def __init__(self, nombre: str, apellido: str) -> None:
         super().__init__(nombre, apellido)
+        Student.__id += 1
+        self.__id = Student.__id
         self.califications = []
         self.subjects = []
 
@@ -90,13 +125,24 @@ class Student(User):
         if (career):
             self.career = (career)
 
+    @property
+    def id(self):
+        return self.__id
+
+    def __repr__(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "lastname": self.lastname,
+        }
+
 
 class calification:
     __id = 0
 
     def __init__(self, subject: str, paralell: str, student: str, assistance: int, N1: float, N2: float, EX1: float, N3: float, N4: float, EX2: float, RE: float = 0) -> None:
         calification.__id += 1
-        self.id = calification.__id
+        self.__id = calification.__id
         self.subject = subject
         self.paralell = paralell
         self.assistance = assistance
@@ -114,6 +160,23 @@ class calification:
     @property
     def id(self):
         return self.__id
+
+    def __repr__(self):
+        return {
+            "id": self.id,
+            "subject": self.subject,
+            "paralell": self.paralell,
+            "student": self.student,
+            "N1": self.N1,
+            "N2": self.N2,
+            "EX1": self.EX1,
+            "P1": self.P1,
+            "N3": self.N3,
+            "N4": self.N4,
+            "EX2": self.EX2,
+            "P2": self.P2,
+            "FINAL": self.FINAL,
+        }
 
 
 class Grade:
