@@ -1,1 +1,20 @@
-[]
+[
+  {
+    "id": 1,
+    "name": "software",
+    "faculty": "faci",
+    "university": {
+      "id": 1,
+      "name": "UNEMI"
+    }
+  },
+  {
+    "id": 1,
+    "name": "adre",
+    "faculty": "xd",
+    "university": {
+      "id": 1,
+      "name": "UNEMI"
+    }
+  }
+]

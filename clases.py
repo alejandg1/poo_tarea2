@@ -58,9 +58,6 @@ class Teacher(User):
     def add_subject(self, subject):
         self.subjects.append(subject)
 
-    def qualify(self):
-        pass
-
     @property
     def id(self):
         return self.__id
@@ -111,16 +108,13 @@ class Student(User):
         super().__init__(nombre, apellido)
         Student.__id += 1
         self.__id = Student.__id
-        self.califications = []
         self.subjects = []
 
     def enroll(self, subject: Subject) -> None:
         if (subject):
             self.subjects.append(subject)
-            self.califications.append(
-                calification(subject.name, subject.paralell, 0, 0, 0, 0, 0, 0, 0, 0))
-
     # matricular carrera
+
     def enroll_career(self, career: Career) -> None:
         if (career):
             self.career = (career)
@@ -144,6 +138,7 @@ class calification:
         calification.__id += 1
         self.__id = calification.__id
         self.subject = subject
+        self.student = student
         self.paralell = paralell
         self.assistance = assistance
         self.N1 = N1
@@ -175,9 +170,6 @@ class calification:
             "N4": self.N4,
             "EX2": self.EX2,
             "P2": self.P2,
+            "RE": self.RE,
             "FINAL": self.FINAL,
         }
-
-
-class Grade:
-    pass
