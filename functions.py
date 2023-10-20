@@ -3,8 +3,6 @@ import colorama
 from tabulate import tabulate
 import json
 import os
-import time
-import platform
 
 
 def is_an(value) -> bool:
@@ -15,10 +13,11 @@ def is_an(value) -> bool:
     return (is_an)
 
 
-def clear(t):
-    sys = platform.system()
-    time.sleep(t)
-    if (sys == "Windows"):
+def clear():
+    print("Presione una tecla para continuar...")
+    input(">> ")
+    sys = os.name
+    if (sys == "nt"):
         os.system("cls")
     else:
         os.system("clear")
@@ -181,7 +180,7 @@ def qualify():
                     print("Choose the ID of the subject to be graded: ")
                     print_table(subjects, "non_person")
                     election: int = (input(">> "))
-                    if (is_an(election) and check_id(election, subjects)):
+                    if (is_an(election)):
                         election = int(election)
                         found: bool = check_id(election, subjects)
                         subject = subjects[election-1]
@@ -207,7 +206,8 @@ def qualify():
                                 N4 = int(N4)
                                 EX2 = int(EX2)
                                 RE = int(RE)
-                                name = student["name"]+" "+student["lastname"]
+                                name = student["name"] + \
+                                    " "+student["lastname"]
                                 calific = calification(
                                     subject["name"], paralel, name, asistance, N1, N2, EX1, N3, N4, EX2, RE)
                                 file = read_json("califications.json")
@@ -218,9 +218,10 @@ def qualify():
                                       "enter numbers" + colorama.Fore.RESET)
                         else:
                             print("subject not found")
+
                     else:
                         print(colorama.Fore.RED +
-                              "incorrect data" + colorama.Fore.RESET)
+                              "enter numbers" + colorama.Fore.RESET)
 
                 else:
                     print(colorama.Fore.GREEN +

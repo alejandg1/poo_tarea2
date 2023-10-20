@@ -7,15 +7,15 @@ options = {
     2: "new career",
     3: "new teacher",
     4: "new student",
-    6: "new subject",
-    7: "qualify",
-    8: "visualize subjects",
-    9: "visualize careers",
-    10: "visualize teachers",
-    11: "visualize students",
-    12: "visualize ratings",
-    13: "filter ratings",
-    14: "exit"
+    5: "new subject",
+    6: "qualify",
+    7: "visualize subjects",
+    8: "visualize careers",
+    9: "visualize teachers",
+    10: "visualize students",
+    11: "visualize ratings",
+    12: "filter ratings",
+    13: "exit"
 }
 
 headers = ["Choose an option: "]
@@ -32,46 +32,46 @@ def main():
         match opt:
             case "1":
                 functions.new_university()
-                functions.clear(3)
+
             case "2":
                 functions.new_career()
-                functions.clear(3)
+
             case "3":
                 functions.new_teacher()
-                functions.clear(3)
+
             case "4":
                 functions.new_student()
-                functions.clear(3)
-            case "6":
+
+            case "5":
                 functions.new_subject()
-                functions.clear(3)
-            case "7":
+
+            case "6":
                 functions.qualify()
-                functions.clear(3)
-            case "8":
+
+            case "7":
                 functions.visualize("subjects.json", "non_person")
-                functions.clear(5)
+
+            case "8":
+                functions.visualize("careers.json", "non_person")
+
             case "9":
-                functions.visualize("careers.json", "person")
-                functions.clear(5)
-            case "10":
                 functions.visualize("teachers.json", "person")
-                functions.clear(5)
-            case "11":
+
+            case "10":
                 functions.visualize("students.json", "person")
-                functions.clear(5)
-            case "12":
+
+            case "11":
                 functions.visualize("califications.json", "calification")
-                functions.clear(5)
-            case "13":
+
+            case "12":
                 functions.califications_filter()
-                functions.clear(5)
-            case "14":
+
+            case "13":
                 break
 
             case _:
                 print(colorama.Fore.RED+"opción invalida"+colorama.Fore.RESET)
-                functions.clear(3)
+        functions.clear()
 
 
 main()
