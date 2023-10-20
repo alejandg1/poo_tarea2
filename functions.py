@@ -1,6 +1,5 @@
-from clases import Student, Career, calification, Subject, Teacher, University
-import colorama
 from tabulate import tabulate
+import colorama
 import json
 import os
 
@@ -21,87 +20,6 @@ def clear():
         os.system("cls")
     else:
         os.system("clear")
-
-
-def new_student() -> None:
-    name = input("enter student name: ")
-    last_name = input("enter student lastname: ")
-    student = Student(name, last_name)
-    file = read_json("students.json")
-    file.append(student.__repr__())
-    write_json("students.json", file)
-
-
-def new_university() -> None:
-    name = input("enter university name: ")
-    university = University(name)
-    file = read_json("university.json")
-    file.append(university.__repr__())
-    write_json("university.json", file)
-
-
-def new_career() -> None:
-    universities = read_json("university.json")
-    if (exist_obj(universities)):
-        print("Choose the ID of the university of this career")
-        print_table(universities, "non_person")
-        election: int = (input(">> "))
-        if (is_an(election)):
-            election = int(election)
-            found: bool = check_id(election, universities)
-            if (found):
-                uni = universities[election-1]
-                name = input("enter career name: ")
-                faculty = input("enter a faculty name: ")
-            # instanciar
-                career = Career(name, faculty, uni)
-                file = read_json("careers.json")
-                file.append(career.__repr__())
-                write_json("careers.json", file)
-            else:
-                print(colorama.Fore.RED+"university not found"+colorama.Fore.RESET)
-        else:
-            print(colorama.Fore.RED+"enter numbers"+colorama.Fore.RESET)
-
-    else:
-        print(colorama.Fore.GREEN +
-              "Oh, there are no universities"+colorama.Fore.RESET)
-
-
-def new_subject() -> None:
-    teachers = read_json("teachers.json")
-    if (exist_obj(teachers)):
-        print("Choose the ID of the teacher of this subject")
-        print_table(teachers, "person")
-        election: int = (input(">> "))
-        if (election.isdigit()):
-            election = int(election)
-            found: bool = check_id(election, teachers)
-            if (found):
-                teacher = teachers[election-1]
-                name = input("enter subject name: ")
-                paralell = input("enter subject paralell: ")
-                level = input("enter subject level: ")
-                start = input("enter the subject start: ")
-                end = input("enter the subject end: ")
-        # instanciar
-                subject = Subject(name, teacher, level, paralell, start, end)
-                file = read_json("subjects.json")
-                file.append(subject.__repr__())
-                write_json("subjects.json", file)
-            else:
-                print(colorama.Fore.RED+"teacher not found"+colorama.Fore.RESET)
-    else:
-        print(colorama.Fore.RED+"enter numbers"+colorama.Fore.RESET)
-
-
-def new_teacher() -> Teacher:
-    name = input("enter the teacher's name: ")
-    last_name = input("enter the teacher's lastname: ")
-    teacher = Teacher(name, last_name)
-    file = read_json("teachers.json")
-    file.append(teacher.__repr__())
-    write_json("teachers.json", file)
 
 
 def check_id(id: int, iterable: object) -> bool:
@@ -143,14 +61,24 @@ def obtain_element(id: int, iterable: object):
 
 
 def read_json(file: str) -> None:
-    with open(f"./data/{file}", "r") as file:
-        return json.load(file)
+    try:
+        with open(f"./data/{file}", "r") as file:
+            return json.load(file)
+    except Exception as e:
+        print(f"error to read file {e} ")
+    except FileNotFoundError as e:
+        print(f"file not found. {e}")
 
 
 def write_json(file: str, content: object) -> None:
-    with open(f"./data/{file}", "w") as file:
-        content = json.dumps(content)
-        file.write(content)
+    try:
+        with open(f"./data/{file}", "w") as file:
+            content = json.dumps(content)
+            file.write(content)
+    except Exception as e:
+        print(f"error to write file. {e} ")
+    except FileNotFoundError as e:
+        print(f"file not found. {e}")
 
 
 def exist_obj(obj):
@@ -160,102 +88,9 @@ def exist_obj(obj):
     return exist
 
 
-def qualify():
-    students = read_json("students.json")
-    if (len(students) < 1):
-        print(colorama.Fore.GREEN+"Oh, there are no students"+colorama.Fore.RESET)
-    else:
-        # escojer estudiante a calificar
-        print("Choose the ID of the student to be graded")
-        print_table(students, "person")
-        election: int = (input(">> "))
-        if (election.isdigit()):
-            election = int(election)
-            found: bool = check_id(election, students)
-            if (found):
-                # escoger materia a calificar
-                student = students[election-1]
-                subjects = read_json("subjects.json")
-                if (exist_obj(subjects)):
-                    print("Choose the ID of the subject to be graded: ")
-                    print_table(subjects, "non_person")
-                    election: int = (input(">> "))
-                    if (is_an(election)):
-                        election = int(election)
-                        found: bool = check_id(election, subjects)
-                        subject = subjects[election-1]
-                        if (found):
-                            paralel = input("enter the paralell: ")
-                            asistance = input(
-                                "enter the asistance of the student: ")
-                            N1 = (input("enter grade N1: "))
-                            N2 = (input("enter grade N2: "))
-                            EX1 = (input("enter grade EX1: "))
-                            N3 = (input("enter grade N3: "))
-                            N4 = (input("enter grade N4: "))
-                            EX2 = (input("enter grade EX2: "))
-                            RE = (input("enter grade RE: "))
-                            continu = is_an(N1) and is_an(N2) and is_an(
-                                EX1) and is_an(N3) and is_an(N4) and is_an(EX2) and is_an(RE)
-
-                            if (continu):
-                                N1 = int(N1)
-                                N2 = int(N2)
-                                EX1 = int(EX1)
-                                N3 = int(N3)
-                                N4 = int(N4)
-                                EX2 = int(EX2)
-                                RE = int(RE)
-                                name = student["name"] + \
-                                    " "+student["lastname"]
-                                calific = calification(
-                                    subject["name"], paralel, name, asistance, N1, N2, EX1, N3, N4, EX2, RE)
-                                file = read_json("califications.json")
-                                file.append(calific.__repr__())
-                                write_json("califications.json", file)
-                            else:
-                                print(colorama.Fore.RED +
-                                      "enter numbers" + colorama.Fore.RESET)
-                        else:
-                            print("subject not found")
-
-                    else:
-                        print(colorama.Fore.RED +
-                              "enter numbers" + colorama.Fore.RESET)
-
-                else:
-                    print(colorama.Fore.GREEN +
-                          "Oh, there are no subjects"+colorama.Fore.RESET)
-
-            else:
-                print("no found")
-        else:
-            print(colorama.Fore.RED + "enter numbers" + colorama.Fore.RESET)
-
-
-def visualize(file, tipo):
-    data = read_json(file)
-    print_table(data, tipo)
-
-
-def califications_filter():
-    subjects = read_json("subjects.json")
-    if (exist_obj(subjects)):
-        print("Choose the ID of the subject: ")
-        print_table(subjects, "non_person")
-        election: int = (input(">> "))
-        if (is_an(election)):
-            election = int(election)
-            found: bool = check_id(election, subjects)
-            califications = read_json("califications.json")
-            if (found):
-                subject = subjects[election-1]
-                table = []
-                for element in califications:
-                    if (element["subject"] == subject["name"]):
-                        table.append(element)
-                print_table(table, "calification")
-            else:
-                print(colorama.Fore.RED + "not found" + colorama.Fore.RESET)
-        else:
-            print(colorama.Fore.RED + "enter numbers" + colorama.Fore.RESET)
+def msg(msg: str, tipe: str):
+    match tipe:
+        case ("error"):
+            print(colorama.Fore.RED + msg + colorama.Fore.RESET)
+        case ("info"):
+            print(colorama.Fore.BLUE + msg + colorama.Fore.RESET)

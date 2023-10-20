@@ -1,5 +1,6 @@
-import functions
-import colorama
+from visualize import visualize, califications_filter
+from create import qualify, new_career, new_student, new_subject, new_teacher, exist_obj, new_university
+from functions import msg
 from tabulate import tabulate
 
 options = {
@@ -31,47 +32,46 @@ def main():
         opt = input(">> ")
         match opt:
             case "1":
-                functions.new_university()
+                new_university()
 
             case "2":
-                functions.new_career()
+                new_career()
 
             case "3":
-                functions.new_teacher()
+                new_teacher()
 
             case "4":
-                functions.new_student()
+                new_student()
 
             case "5":
-                functions.new_subject()
+                new_subject()
 
             case "6":
-                functions.qualify()
+                qualify()
 
             case "7":
-                functions.visualize("subjects.json", "non_person")
+                visualize("subjects.json", "non_person")
 
             case "8":
-                functions.visualize("careers.json", "non_person")
+                visualize("careers.json", "non_person")
 
             case "9":
-                functions.visualize("teachers.json", "person")
+                visualize("teachers.json", "person")
 
             case "10":
-                functions.visualize("students.json", "person")
+                visualize("students.json", "person")
 
             case "11":
-                functions.visualize("califications.json", "calification")
+                visualize("califications.json", "calification")
 
             case "12":
-                functions.califications_filter()
+                califications_filter()
 
             case "13":
                 break
 
             case _:
-                print(colorama.Fore.RED+"opción invalida"+colorama.Fore.RESET)
-        functions.clear()
+                msg("opcion invalida", "error")
 
 
 main()
