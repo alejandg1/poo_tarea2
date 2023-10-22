@@ -1,15 +1,1 @@
-[
-  {
-    "id": 1,
-    "name": "matemat",
-    "teacher": {
-      "id": 1,
-      "name": "adre",
-      "lastname": "xd"
-    },
-    "level": "0",
-    "paralell": "0",
-    "start": "0",
-    "end": "0"
-  }
-]
+[]

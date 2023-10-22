@@ -31,25 +31,29 @@ def check_id(id: int, iterable: object) -> bool:
 
 
 def print_table(iterable: object, entit: str):
-    table = []
-    match entit:
-        case("person"):
-            headers = ["ID", "Name", "Last name"]
-            for element in iterable:
-                table.append(
-                    [element['id'], element['name'], element['lastname']])
-        case("non_person"):
-            headers = ["ID", "Name"]
-            for element in iterable:
-                table.append(
-                    [element['id'], element['name']])
-        case("calification"):
-            headers = ["ID", "subject", "student", "P1", "P2", "RE", "FINAL"]
-            for element in iterable:
-                table.append([element['id'], element["subject"], element['student'],
-                             element["P1"], element["P2"], element["RE"], element["FINAL"]])
-    list = tabulate(table, headers, tablefmt="rounded_grid")
-    print(list)
+    if ((len(iterable) > 0)):
+        table = []
+        match entit:
+            case("person"):
+                headers = ["ID", "Name", "Last name"]
+                for element in iterable:
+                    table.append(
+                        [element['id'], element['name'], element['lastname']])
+            case("non_person"):
+                headers = ["ID", "Name"]
+                for element in iterable:
+                    table.append(
+                        [element['id'], element['name']])
+            case("calification"):
+                headers = ["ID", "subject", "student",
+                           "P1", "P2", "RE", "FINAL"]
+                for element in iterable:
+                    table.append([element['id'], element["subject"], element['student'],
+                                  element["P1"], element["P2"], element["RE"], element["FINAL"]])
+        list = tabulate(table, headers, tablefmt="rounded_grid")
+        print(list)
+    else:
+        print("no existen registros")
 
 
 def obtain_element(id: int, iterable: object):

@@ -144,13 +144,13 @@ class calification:
         self.N1 = N1
         self.N2 = N2
         self.EX1 = EX1
-        self.P1 = lambda N1, N2: N1 + N2
+        self.P1 = N1 + N2
         self.N3 = N3
         self.N4 = N4
         self.EX2 = EX2
-        self.P2 = lambda N3, N4: N3 + N4
+        self.P2 = N3+N4
         self.RE = RE
-        self.FINAL = lambda P1, P2, RE: P1+P2+RE
+        self.FINAL = self.P1+self.P2+self.RE
 
     @property
     def id(self):
