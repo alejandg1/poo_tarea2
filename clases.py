@@ -1,3 +1,6 @@
+from functions import print_table
+
+
 class University:
     __id = 1
 
@@ -176,8 +179,50 @@ class calification:
 
 
 class acta:
-    pass
+    __id = 0
+
+    def __init__(self, subject: object, date: str):
+        acta.__id += 1
+        self.ID = acta.id
+        self.subject = subject
+        self.teacher = subject.teacher
+        self.date: date
+
+    def add_detail(self, iterable: object):
+        calification = det_acta(iterable)
+        self.califications.append(calification.__repr__())
+
+    def __repr__(self) -> str:
+        return {
+            "subject": self.subject,
+            "teacher": self.teacher,
+            "date": self.date,
+            "califications": self.califications
+        }
+
+    def print(self):
+        print(f"subject: {self.subject}")
+        print(f"teacher: {self.teacher}")
+        print(f"date: {self.date}")
+        print_table(self.califications, "calification")
 
 
 class det_acta:
-    pass
+    def __init__(self, calification: object) -> None:
+        self.calification = calification
+
+    def __repr__(self):
+        return {
+            "student": self.calification.student,
+            "N1": self.calification.N1,
+            "N2": self.calification.N2,
+            "EX1": self.calification.EX1,
+            "P1": self.calification.P1,
+            "N3": self.calification.N3,
+            "N4": self.calification.N4,
+            "EX2": self.calification.EX2,
+            "P2": self.calification.P2,
+            "RE": self.calification.RE,
+            "FINAL": self.calification.FINAL,
+
+        }

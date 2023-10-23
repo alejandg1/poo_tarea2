@@ -1,5 +1,5 @@
 from functions import read_json, write_json, exist_obj, print_table, is_an, check_id, msg
-from clases import Student, Career, calification, Subject, Teacher, University
+from clases import Student, Career, calification, Subject, Teacher, University, acta
 
 
 def new_student() -> None:
@@ -142,3 +142,29 @@ def qualify():
                 msg("not found", "error")
         else:
             msg("enter numbers", "error")
+
+
+def generate_acta():
+    subjects = read_json("subjects.json")
+    if (exist_obj(subjects)):
+        print("Choose the ID of the subject to generate a report: ")
+        print_table(subjects, "non_person")
+        election: int = (input(">> "))
+        if (is_an(election)):
+            election = int(election)
+            found: bool = check_id(election, subjects)
+            subject = subjects[election-1]
+            if (found):
+                calification = read_json("calification.json")
+                if (exist_obj(calification)):
+                    new_acta = acta(calification.end)
+                    for each in calification:
+                        if (calification.subject == subject.name):
+                            new_acta.add_detail(calification)
+                    new_acta.print()
+                else:
+                    msg("califications are empty")
+        else:
+            msg("enter numbers", "error")
+    else:
+        msg("oh, no subjects found", "info")

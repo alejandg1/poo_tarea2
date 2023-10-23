@@ -1,6 +1,6 @@
 from visualize import visualize, califications_filter
-from create import qualify, new_career, new_student, new_subject, new_teacher, exist_obj, new_university
-from functions import msg
+from create import qualify, new_career, new_student, new_subject, new_teacher, exist_obj, new_university, generate_acta
+from functions import msg, clear
 from tabulate import tabulate
 
 options = {
@@ -16,7 +16,8 @@ options = {
     10: "visualize students",
     11: "visualize ratings",
     12: "filter ratings",
-    13: "exit"
+    13: "generate report",
+    14: "exit"
 }
 
 headers = ["Choose an option: "]
@@ -66,12 +67,15 @@ def main():
 
             case "12":
                 califications_filter()
-
             case "13":
+                generate_acta()
+            case "14":
                 break
 
             case _:
                 msg("opcion invalida", "error")
+
+        clear()
 
 
 main()
