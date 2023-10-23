@@ -173,3 +173,11 @@ class calification:
             "RE": self.RE,
             "FINAL": self.FINAL,
         }
+
+
+class acta:
+    pass
+
+
+class det_acta:
+    pass
